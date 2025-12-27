@@ -61,6 +61,26 @@ public class CoinManager : MonoBehaviour
         return coinCount;
     }
 
+    // 👉 Get Total Saved Coins
+    public int GetTotalCoins()
+    {
+        return totalCoins;
+    }
+
+    // 👉 Spend Coins (Returns true if successful)
+    public bool SpendCoins(int amount)
+    {
+        if (totalCoins >= amount)
+        {
+            totalCoins -= amount;
+            PlayerPrefs.SetInt(TOTAL_COIN_KEY, totalCoins);
+            PlayerPrefs.Save();
+            UpdateCoinUI();
+            return true;
+        }
+        return false;
+    }
+
     // 👉 Call this on Game Over Restart Button
     public void ResetCoins()
     {

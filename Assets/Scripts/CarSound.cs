@@ -44,11 +44,29 @@ public class CarSound : MonoBehaviour
         engineSource.Stop();
     }
 
+    public void PauseSoundByUser()
+    {
+        if (engineSource.isPlaying)
+        {
+            engineSource.Pause();
+        }
+    }
+
+    public void ResumeSoundByUser()
+    {
+        if (!isGameOver)
+        {
+            engineSource.UnPause();
+        }
+    }
+
     // 🔥 NEW METHOD TO RESUME SOUND
     public void ResumeSound()
     {
         isGameOver = false;
 
+        // If it was paused, UnPause; otherwise Play
+        engineSource.UnPause();
         if (!engineSource.isPlaying)
         {
             engineSource.Play();

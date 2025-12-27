@@ -199,12 +199,18 @@ public class Buttons : MonoBehaviour
     {
         Time.timeScale = 0f;
         pausedPanel?.SetActive(true);
+
+        MusicManager.Instance?.PauseMusicByUser();
+        FindFirstObjectByType<CarSound>()?.PauseSoundByUser();
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1f;
         pausedPanel?.SetActive(false);
+
+        MusicManager.Instance?.ResumeMusicByUser();
+        FindFirstObjectByType<CarSound>()?.ResumeSoundByUser();
     }
 
     // 👉 MAIN MENU FUNCTION

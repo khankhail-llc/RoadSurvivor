@@ -1830,6 +1830,10 @@ MonoBehaviour:
   - {fileID: 5852668321986813267, guid: 7205e5233a76446aeaa2614ba17b48e9, type: 3}
   spawnInterval: 1
   minGapInSameLane: 3
+  laneXPositions:
+  - -1.88
+  - -0.06
+  - 1.81
   poolSize: 18
 --- !u!4 &408120373
 Transform:
@@ -1840,7 +1844,7 @@ Transform:
   m_GameObject: {fileID: 408120371}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: 3.62, z: 0}
+  m_LocalPosition: {x: -0.08, y: 3.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3208,7 +3212,8 @@ Transform:
   m_LocalPosition: {x: 199.62454, y: 637.40826, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1809569037}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &779018862
@@ -3255,7 +3260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c343af96b647a4a0aa9a6e1b4e89ee04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InfiniteRoadSpawner
-  roadPrefab: {fileID: 5861732719607072014, guid: 8d46818a7be764e22a30c05d508e2c27, type: 3}
+  roadPrefab: {fileID: 4522399349763827963}
   roadsToKeep: 8
   spawnAheadDistance: 0
   recycleBehindDistance: 15
@@ -5187,50 +5192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
---- !u!1 &1130726959
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1130726960}
-  - component: {fileID: 1130726961}
-  m_Layer: 0
-  m_Name: CarSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1130726960
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1130726959}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -154.06583, y: 1900.213, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1130726961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1130726959}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0563bd2414a934a78987672c2f9bab80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarSpawner
 --- !u!1 &1235317631
 GameObject:
   m_ObjectHideFlags: 0
@@ -6103,6 +6064,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7469500055946079911, guid: 09c16bb350af343d399dda42e9556747, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6765,12 +6730,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809569035}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 354.34814, y: 1190.1482, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 154.7236, y: 552.7399, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 720194831}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1811543364
 GameObject:
@@ -8505,6 +8470,68 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23024701fee254e75b572f688247fe8b, type: 3}
+--- !u!1001 &4522399349763827962
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 618980900424503433, guid: 2601b704269759641af784f0958747db, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 618980900424503433, guid: 2601b704269759641af784f0958747db, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 618980900424503433, guid: 2601b704269759641af784f0958747db, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 618980900424503433, guid: 2601b704269759641af784f0958747db, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 618980900424503433, guid: 2601b704269759641af784f0958747db, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 618980900424503433, guid: 2601b704269759641af784f0958747db, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 618980900424503433, guid: 2601b704269759641af784f0958747db, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 618980900424503433, guid: 2601b704269759641af784f0958747db, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 618980900424503433, guid: 2601b704269759641af784f0958747db, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 618980900424503433, guid: 2601b704269759641af784f0958747db, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404012937989896897, guid: 2601b704269759641af784f0958747db, type: 3}
+      propertyPath: m_Name
+      value: Road image_0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2601b704269759641af784f0958747db, type: 3}
+--- !u!1 &4522399349763827963 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8404012937989896897, guid: 2601b704269759641af784f0958747db, type: 3}
+  m_PrefabInstance: {fileID: 4522399349763827962}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4802230963101432112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8981,6 +9008,7 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1790751704}
   - {fileID: 1694221158}
+  - {fileID: 4522399349763827962}
   - {fileID: 1691288450}
   - {fileID: 1363628815}
   - {fileID: 664275737}
@@ -8991,7 +9019,6 @@ SceneRoots:
   - {fileID: 779018863}
   - {fileID: 1646013978}
   - {fileID: 431406014}
-  - {fileID: 1809569037}
   - {fileID: 316133922}
   - {fileID: 720194831}
   - {fileID: 1477356889}
@@ -8999,5 +9026,4 @@ SceneRoots:
   - {fileID: 2008574409}
   - {fileID: 8062801043402085333}
   - {fileID: 1394522293}
-  - {fileID: 1130726960}
   - {fileID: 397575715}

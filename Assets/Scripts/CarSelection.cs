@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class CarSelection : MonoBehaviour
 {
-    [Header("Car Display")]
+    [Header("Car Display")] 
     [SerializeField] private SpriteRenderer previewRenderer;  // Car preview
     [SerializeField] private Sprite[] carPreviews;            // Har car ka preview sprite (7 cars)
 
@@ -16,12 +17,27 @@ public class CarSelection : MonoBehaviour
     [SerializeField] private GameObject lockIcon;             // Lock icon (jab car locked ho)
     [SerializeField] private GameObject watchAdButton;        // "Watch Ad to Unlock" button
     [SerializeField] private GameObject selectButton;         // "Select" button (jab car unlocked ho)
+    
+    [Header("Buying System")]
+    [SerializeField] private Button buyButton;                // "Buy" button (coins se khareedne ke liye)
+    [SerializeField] private TextMeshProUGUI priceText;       // Optional: Single price text on button
+    [SerializeField] private GameObject[] carPriceLabels;     // ✅ USER REQUEST: Separate price objects for each car
+    [SerializeField] private int[] carPrices;                 // Har car ki price (Inspector mai set karo)
 
     private int currentIndex = 0;
     private const int TOTAL_CARS = 7;
 
     private void Start()
     {
+        // Default prices if not set individually
+        if (carPrices == null || carPrices.Length != TOTAL_CARS)
+        {
+            carPrices = new int[] { 0, 500, 1000, 1500, 2000, 3000, 5000 };
+        }
+
+        if (buyButton != null) 
+            buyButton.onClick.AddListener(BuyCurrentCar);
+
         // Previously selected car load karo
         currentIndex = PlayerPrefs.GetInt("SelectedCar", 0);
         
@@ -42,6 +58,16 @@ public class CarSelection : MonoBehaviour
         if (statsBarsImage != null && currentIndex < statsBarsSprites.Length)
             statsBarsImage.sprite = statsBarsSprites[currentIndex];
 
+        // Price Labels update (Toggle correct price label)
+        if (carPriceLabels != null)
+        {
+            for (int i = 0; i < carPriceLabels.Length; i++)
+            {
+                if (carPriceLabels[i] != null)
+                    carPriceLabels[i].SetActive(i == currentIndex);
+            }
+        }
+
         // Lock/Unlock UI update karo
         UpdateUIBasedOnLockState();
     }
@@ -49,21 +75,72 @@ public class CarSelection : MonoBehaviour
     private void UpdateUIBasedOnLockState()
     {
         bool isUnlocked = CarUnlockManager.Instance.IsCarUnlocked(currentIndex);
+        int price = (currentIndex < carPrices.Length) ? carPrices[currentIndex] : 999999;
+        int currentCoins = (CoinManager.Instance != null) ? CoinManager.Instance.GetTotalCoins() : 0;
+
+        // Hide all price labels if unlocked (Optional: depends if user wants to see price of owned cars)
+        // User didn't specify, but usually we hide price if owned.
+        // Let's keep them active in UpdateCarDisplay so user knows value, OR hide them here if unlocked.
+        // User said "jis sy user ko pta chaly a y car kitny ki hai" (so they know how much it IS).
+        // I will hide price labels if unlocked to be clean, or keep them if they are just info.
+        // Assuming Hide for now to avoid clutter, can change if requested.
+        if (isUnlocked && carPriceLabels != null && currentIndex < carPriceLabels.Length && carPriceLabels[currentIndex] != null)
+        {
+            carPriceLabels[currentIndex].SetActive(false);
+        }
 
         if (isUnlocked)
         {
             // Car unlocked hai
             if (lockIcon != null) lockIcon.SetActive(false);
             if (watchAdButton != null) watchAdButton.SetActive(false);
+            if (buyButton != null) buyButton.gameObject.SetActive(false); 
             if (selectButton != null) selectButton.SetActive(true);
         }
         else
         {
             // Car locked hai
             if (lockIcon != null) lockIcon.SetActive(true);
-            if (watchAdButton != null) watchAdButton.SetActive(true);
             if (selectButton != null) selectButton.SetActive(false);
+
+            // ✅ USER REQUEST: Watch Ad button ALWAYS visible if locked
+            if (watchAdButton != null) watchAdButton.SetActive(true);
+
+            // Buy Button Logic
+            if (buyButton != null)
+            {
+                // Agar coins enough hain, toh Buy button dikhao
+                if (currentCoins >= price)
+                {
+                    buyButton.gameObject.SetActive(true);
+                    if (priceText != null) priceText.text = price.ToString();
+                    
+                    // Note: Ad button is ALREADY active above
+                }
+                else
+                {
+                    // Coins kam hain -> Buy button HIDE
+                    buyButton.gameObject.SetActive(false);
+                }
+            }
         }
+    }
+
+    public void BuyCurrentCar()
+    {
+         int price = (currentIndex < carPrices.Length) ? carPrices[currentIndex] : 999999;
+
+         if (CoinManager.Instance.SpendCoins(price))
+         {
+             CarUnlockManager.Instance.UnlockCar(currentIndex);
+             ClickSound.Instance?.PlayClick(); // Optional click sound
+             UpdateUIBasedOnLockState();
+             Debug.Log("Car Purchased: " + currentIndex);
+         }
+         else
+         {
+             Debug.Log("Not enough coins!");
+         }
     }
 
     public void NextCar()

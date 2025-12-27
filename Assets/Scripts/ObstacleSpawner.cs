@@ -8,15 +8,17 @@ public class ObstacleSpawner : MonoBehaviour
     public Camera mainCamera;
 
     [Header("Obstacle Settings")]
-    public GameObject[] obstaclePrefabs; // all obstacle prefabs
+    public GameObject[] obstaclePrefabs;
     public float spawnInterval = 1.4f;
     public float minGapInSameLane = 8f;
+
+    [Header("Lane Settings (3 Lane Road)")]
+    public float[] laneXPositions = new float[3]; // Inspector mai 3 lanes ki X values
 
     [Header("Pooling Settings")]
     public int poolSize = 25;
 
     private float timer = 0f;
-    private float[] laneX;
     private float[] lastSpawnYPerLane;
     private List<GameObject> pool = new List<GameObject>();
 
@@ -28,20 +30,21 @@ public class ObstacleSpawner : MonoBehaviour
         if (mainCamera == null)
             mainCamera = Camera.main;
 
-        // Screen width based lanes
-        float cameraWidth = mainCamera.orthographicSize * mainCamera.aspect;
-        float margin = 0.5f; // obstacle spawn margin from edges
-        laneX = new float[] { -cameraWidth + margin, 0f, cameraWidth - margin };
+        // Safety check
+        if (laneXPositions.Length != 3)
+        {
+            Debug.LogError("LaneXPositions must contain exactly 3 values!");
+            return;
+        }
 
         // Initialize last spawn Y per lane
-        lastSpawnYPerLane = new float[laneX.Length];
+        lastSpawnYPerLane = new float[laneXPositions.Length];
         for (int i = 0; i < lastSpawnYPerLane.Length; i++)
             lastSpawnYPerLane[i] = -9999f;
 
-        // Initialize pool (any prefab)
+        // Initialize pool
         for (int i = 0; i < poolSize; i++)
         {
-            // Pick a random prefab
             GameObject prefab = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)];
             GameObject obj = Instantiate(prefab);
             obj.SetActive(false);
@@ -65,7 +68,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     void SpawnOneObstacle()
     {
-        int lane = Random.Range(0, laneX.Length);
+        int lane = Random.Range(0, laneXPositions.Length);
         float spawnY = mainCamera.transform.position.y + mainCamera.orthographicSize + 1f;
 
         if (spawnY - lastSpawnYPerLane[lane] < minGapInSameLane)
@@ -74,22 +77,19 @@ public class ObstacleSpawner : MonoBehaviour
         GameObject obs = GetFromPool();
         if (obs == null) return;
 
-        obs.transform.position = new Vector3(laneX[lane], spawnY, 0f);
+        obs.transform.position = new Vector3(laneXPositions[lane], spawnY, 0f);
         obs.SetActive(true);
         lastSpawnYPerLane[lane] = spawnY;
     }
 
     GameObject GetFromPool()
     {
-        // Pick first inactive object from pool
         foreach (GameObject obj in pool)
         {
             if (!obj.activeInHierarchy)
             {
-                // Replace with new random prefab
                 GameObject prefab = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)];
 
-                // Destroy old object and replace with new prefab
                 Vector3 pos = obj.transform.position;
                 pool.Remove(obj);
                 Destroy(obj);
@@ -103,7 +103,6 @@ public class ObstacleSpawner : MonoBehaviour
             }
         }
 
-        // Pool exhausted → create new random prefab
         GameObject newObj2 = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)]);
         if (newObj2.GetComponent<Obstacle>() == null)
             newObj2.AddComponent<Obstacle>();

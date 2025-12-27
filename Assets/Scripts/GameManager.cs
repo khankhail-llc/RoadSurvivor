@@ -67,6 +67,10 @@ public class GameManager : MonoBehaviour
 
         reviveCoroutine = StartCoroutine(ReviveCountdown());
 
+        // 🔥 FIX: Pause Audio on Revive Screen
+        MusicManager.Instance?.PauseMusicForGameOver();
+        FindFirstObjectByType<CarSound>()?.PauseSoundByUser();
+
         Debug.Log("PLAYER OUT → REVIVE OFFER");
     }
 
@@ -144,6 +148,7 @@ public class GameManager : MonoBehaviour
         FuelManager.Instance?.HideFuelTemporarily();
         FindFirstObjectByType<Buttons>()?.HidePauseButton();
         MusicManager.Instance?.PauseMusicForGameOver();
+        FindFirstObjectByType<CarSound>()?.PlayerOut();
 
         Debug.Log("GAME OVER ❌");
     }
