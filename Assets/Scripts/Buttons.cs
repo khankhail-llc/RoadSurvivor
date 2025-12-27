@@ -1,3 +1,4 @@
+
 // using UnityEngine;
 // using UnityEngine.SceneManagement;
 // using UnityEngine.UI;
@@ -8,6 +9,7 @@
 //     public Button playButton;
 //     public Button restartButton;
 //     public Button exitButton;
+//     public Button garageButton;   // ✅ NEW
 
 //     [Header("Pause UI")]
 //     public Button pauseButton;
@@ -23,12 +25,15 @@
 //     [Header("Scene Settings")]
 //     public string gamePlaySceneName = "GamePlay";
 //     public string mainMenuSceneName = "Main Menu";
+//     public string garageSceneName = "Garage";   // ✅ NEW
 
 //     private void Start()
 //     {
 //         playButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); StartGame(); });
 //         restartButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); RestartGame(); });
 //         exitButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); QuitGame(); });
+
+//         garageButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); OpenGarage(); }); // ✅ NEW
 
 //         pauseButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); PauseGame(); });
 //         resumeButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); ResumeGame(); });
@@ -52,13 +57,13 @@
 //     public void RestartGame()
 //     {
 //         Time.timeScale = 1f;
-
-//         GameManager.Instance?.ResetGame();
 //         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+//     }
 
-//         BannerAdController.Instance?.ReloadBanner();
-//         RewardedAdController.Instance?.LoadRewardedAd();
-//         InterstitialAdController.Instance?.LoadInterstitial();
+//     public void OpenGarage()   // ✅ GARAGE FUNCTION
+//     {
+//         Time.timeScale = 1f;
+//         SceneManager.LoadScene(garageSceneName);
 //     }
 
 //     public void QuitGame()
@@ -74,32 +79,12 @@
 //     {
 //         Time.timeScale = 0f;
 //         pausedPanel?.SetActive(true);
-//         FuelManager.Instance?.HideFuelTemporarily();
-//         MusicManager.Instance?.PauseMusicByUser();
-
-//         var carSound = FindFirstObjectByType<CarSound>();
-//         if (carSound != null && carSound.engineSource != null)
-//             carSound.engineSource.Pause();
-
-//         var carSoundController = FindFirstObjectByType<CarSoundController>();
-//         if (carSoundController != null && carSoundController.engineSound != null)
-//             carSoundController.engineSound.Pause();
 //     }
 
 //     public void ResumeGame()
 //     {
 //         Time.timeScale = 1f;
 //         pausedPanel?.SetActive(false);
-//         FuelManager.Instance?.ShowFuelAfterMenu();
-//         MusicManager.Instance?.ResumeMusicByUser();
-
-//         var carSound = FindFirstObjectByType<CarSound>();
-//         if (carSound != null && carSound.engineSource != null)
-//             carSound.engineSource.UnPause();
-
-//         var carSoundController = FindFirstObjectByType<CarSoundController>();
-//         if (carSoundController != null && carSoundController.engineSound != null)
-//             carSoundController.engineSound.UnPause();
 //     }
 
 //     public void GoHome()
@@ -108,44 +93,21 @@
 //         SceneManager.LoadScene(mainMenuSceneName);
 //     }
 
-//     public void HidePauseButton() => pauseButton?.gameObject.SetActive(false);
-//     public void ShowPauseButton() => pauseButton?.gameObject.SetActive(true);
-
 //     public void OpenSettings()
 //     {
 //         settingsPanel?.SetActive(true);
 //         Time.timeScale = 0f;
-//         FuelManager.Instance?.HideFuelTemporarily();
-//         MusicManager.Instance?.PauseMusicByUser();
-
-//         var carSound = FindFirstObjectByType<CarSound>();
-//         if (carSound != null && carSound.engineSource != null)
-//             carSound.engineSource.Pause();
-
-//         var carSoundController = FindFirstObjectByType<CarSoundController>();
-//         if (carSoundController != null && carSoundController.engineSound != null)
-//             carSoundController.engineSound.Pause();
 //     }
 
 //     public void SettingsBack()
 //     {
-//         settingsPanel.SetActive(false);
+//         settingsPanel?.SetActive(false);
 //         Time.timeScale = 1f;
-//         FuelManager.Instance?.ShowFuelAfterMenu();
-//         MusicManager.Instance?.ResumeMusicByUser();
-
-//         var carSound = FindFirstObjectByType<CarSound>();
-//         if (carSound != null && carSound.engineSource != null)
-//             carSound.engineSource.UnPause();
-
-//         var carSoundController = FindFirstObjectByType<CarSoundController>();
-//         if (carSoundController != null && carSoundController.engineSound != null)
-//             carSoundController.engineSound.UnPause();
 //     }
+
+//     public void HidePauseButton() => pauseButton?.gameObject.SetActive(false);
+//     public void ShowPauseButton() => pauseButton?.gameObject.SetActive(true);
 // }
-
-
-
 
 
 
@@ -161,7 +123,10 @@ public class Buttons : MonoBehaviour
     public Button playButton;
     public Button restartButton;
     public Button exitButton;
-    public Button garageButton;   // ✅ NEW
+    public Button garageButton;
+
+    // 👉 NEW MAIN MENU BUTTON
+    public Button mainMenuButton;
 
     [Header("Pause UI")]
     public Button pauseButton;
@@ -177,7 +142,7 @@ public class Buttons : MonoBehaviour
     [Header("Scene Settings")]
     public string gamePlaySceneName = "GamePlay";
     public string mainMenuSceneName = "Main Menu";
-    public string garageSceneName = "Garage";   // ✅ NEW
+    public string garageSceneName = "Garage";
 
     private void Start()
     {
@@ -185,7 +150,10 @@ public class Buttons : MonoBehaviour
         restartButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); RestartGame(); });
         exitButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); QuitGame(); });
 
-        garageButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); OpenGarage(); }); // ✅ NEW
+        garageButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); OpenGarage(); });
+
+        // 👉 MAIN MENU BUTTON LISTENER
+        mainMenuButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); GoHome(); });
 
         pauseButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); PauseGame(); });
         resumeButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); ResumeGame(); });
@@ -212,7 +180,7 @@ public class Buttons : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void OpenGarage()   // ✅ GARAGE FUNCTION
+    public void OpenGarage()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(garageSceneName);
@@ -239,8 +207,21 @@ public class Buttons : MonoBehaviour
         pausedPanel?.SetActive(false);
     }
 
+    // 👉 MAIN MENU FUNCTION
     public void GoHome()
     {
+        // 👉 Home jate waqt coins aur score reset karo
+        if (CoinManager.Instance != null)
+        {
+            CoinManager.Instance.ResetCoins();
+        }
+
+        SimpleScoreUI scoreUI = FindObjectOfType<SimpleScoreUI>();
+        if (scoreUI != null)
+        {
+            scoreUI.ResetScore();
+        }
+
         Time.timeScale = 1f;
         SceneManager.LoadScene(mainMenuSceneName);
     }

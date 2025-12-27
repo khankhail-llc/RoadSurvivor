@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9131268601135290026}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8059642619124140294}
   - component: {fileID: 233703733953625977}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Freeform Light 2D (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6639880191907325810}
   - component: {fileID: 5213398846732321933}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Head Light L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 920880044637258379}
   - component: {fileID: 4488162092768421784}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Freeform Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 1077932578655998895}
   - component: {fileID: 9142575018251394055}
   - component: {fileID: 5592534280405637779}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -620,7 +620,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8938341493707878427}
   - component: {fileID: 5922549309200546986}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Head Light R
   m_TagString: Untagged
   m_Icon: {fileID: 0}

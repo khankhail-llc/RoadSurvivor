@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8058738659488226458}
   - component: {fileID: 7444968882607975815}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Head Light R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6663210814277224760}
   - component: {fileID: 5496461220880476321}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Head Light R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8387615471164061740}
   - component: {fileID: 6949286854557730108}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Head Light L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4479761030208661924}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Lights (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 242775685191979083}
   - component: {fileID: 2151654241536721957}
   - component: {fileID: 968844863925740712}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: car13-removebg-preview_0
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -327,6 +327,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3126985555154378238
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -372,6 +373,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -346118818858988411, guid: 87521acb50a4e47679ccba7eec20883f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -381,7 +383,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!70 &6095715829062348983
 CapsuleCollider2D:
@@ -483,7 +484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6682679253908079578}
   - component: {fileID: 2317647601035322577}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Head Light L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -567,7 +568,7 @@ GameObject:
   m_Component:
   - component: {fileID: 991955005227667815}
   - component: {fileID: 7797431443626800337}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Freeform Light 2D (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,7 +655,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3644905780193195465}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Lights (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -688,7 +689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4731619245904622201}
   - component: {fileID: 8677572765370375014}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Freeform Light 2D (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

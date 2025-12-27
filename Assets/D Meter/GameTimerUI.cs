@@ -100,9 +100,18 @@ public class SimpleScoreUI : MonoBehaviour
         UpdateScoreText();
     }
 
+    // 👉 Get current score (for game over panel)
+    public int GetCurrentScore()
+    {
+        return score;
+    }
+
     public void StopScore()
     {
         SaveBestScore();
         enabled = false;
     }
 }
+
+
+

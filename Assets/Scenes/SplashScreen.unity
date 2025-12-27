@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4937637301886339680, guid: 7c72a4e8cb21045029d16d8f9513b75c, type: 3}
+  m_Sprite: {fileID: -8885102441172123064, guid: 603bbc3815cec4144a026254fccc51b2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -228,7 +228,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -534}
+  m_AnchoredPosition: {x: 0, y: -51}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &334549271
@@ -289,7 +289,7 @@ GameObject:
   m_IsActive: 1
 --- !u!199 &416590443
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -335,6 +335,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -366,7 +367,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!198 &416590444
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416590442}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 0.2
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -5305,7 +5305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &785039100
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5485,14 +5485,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SplashEffects
   logo: {fileID: 785039100}
-  logoScaleSpeed: 0.4
+  logoScaleSpeed: 0.9
   maxLogoScale: {x: 9, y: 4, z: 1}
   tyre: {fileID: 334549270}
   tyreRotationSpeed: -360
   smokeEmitRate: 100
   smokeLifetime: 4
   smokeOffset: {x: 685, y: 1528, z: 0}
-  delayAfterFullScale: 0.3
+  delayAfterFullScale: 0
 --- !u!4 &1757145245
 Transform:
   m_ObjectHideFlags: 0

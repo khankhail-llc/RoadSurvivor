@@ -125,6 +125,20 @@ public class GameManager : MonoBehaviour
         if (revivePanel) revivePanel.SetActive(false);
         if (gameOverPanel) gameOverPanel.SetActive(true);
 
+        // 👉 Game over stats display karo (coins + score)
+        Debug.Log("[GameManager] Looking for GameOverStats...");
+        GameOverStats gameOverStats = FindObjectOfType<GameOverStats>();
+        
+        if (gameOverStats != null)
+        {
+            Debug.Log("[GameManager] GameOverStats found! Calling ShowGameOverStats()");
+            gameOverStats.ShowGameOverStats();
+        }
+        else
+        {
+            Debug.LogError("[GameManager] GameOverStats NOT FOUND! Make sure GameOverStats script is attached to Game Over Panel!");
+        }
+
         InterstitialAdController.Instance?.TryShowInterstitial();
 
         FuelManager.Instance?.HideFuelTemporarily();
@@ -137,6 +151,18 @@ public class GameManager : MonoBehaviour
     // ================= RESTART =================
     public void RestartGame()
     {
+        // 👉 Restart se pehle coins aur score reset karo
+        if (CoinManager.Instance != null)
+        {
+            CoinManager.Instance.ResetCoins();
+        }
+
+        SimpleScoreUI scoreUI = FindObjectOfType<SimpleScoreUI>();
+        if (scoreUI != null)
+        {
+            scoreUI.ResetScore();
+        }
+
         Time.timeScale = 1f;
         isGameOver = false;
         SceneManager.LoadScene("GamePlay");

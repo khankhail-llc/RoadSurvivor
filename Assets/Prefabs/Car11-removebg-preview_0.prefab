@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6011848550012589394}
   - component: {fileID: 9143955828708544297}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Head Light R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2512636295426214286}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Lights (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7412427034983624597}
   - component: {fileID: 5021099900679302698}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Freeform Light 2D (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 294607703292933724}
   - component: {fileID: 3493692398600592576}
   - component: {fileID: 7205751416215614149}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Car11-removebg-preview_0
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -246,6 +246,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6033583734597437777
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -291,6 +292,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -9004565800168241349, guid: fa43c3fb50ab54189b1da74e0d53b600, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -300,7 +302,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &9112013480583500887
 MonoBehaviour:
@@ -402,7 +403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7337043225066271421}
   - component: {fileID: 6760795886758494858}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Head Light L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7837961753356362489}
   - component: {fileID: 5594913359036967943}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Freeform Light 2D (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

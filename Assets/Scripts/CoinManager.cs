@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using TMPro;
 
@@ -6,9 +7,13 @@ public class CoinManager : MonoBehaviour
     public static CoinManager Instance;
 
     [Header("UI Elements")]
-    public TextMeshProUGUI coinText;
+    public TextMeshProUGUI coinText;       // Current run coins
+    public TextMeshProUGUI totalCoinText;  // Total saved coins
 
-    private int coinCount = 0;
+    private int coinCount = 0;   // 👈 RESET on restart
+    private int totalCoins = 0;  // 👈 NEVER reset
+
+    private const string TOTAL_COIN_KEY = "TOTAL_COINS";
 
     private void Awake()
     {
@@ -20,30 +25,49 @@ public class CoinManager : MonoBehaviour
 
     private void Start()
     {
+        // 👉 Load total coins only
+        totalCoins = PlayerPrefs.GetInt(TOTAL_COIN_KEY, 0);
+
+        // 👉 Reset current coins every time game starts
+        coinCount = 0;
+
         UpdateCoinUI();
     }
 
-    // Call this function whenever player collects a coin
     public void CollectCoin()
     {
-        coinCount++;
+        coinCount++;      // current run
+        totalCoins++;     // lifetime
+
+        // 👉 Save ONLY total coins
+        PlayerPrefs.SetInt(TOTAL_COIN_KEY, totalCoins);
+        PlayerPrefs.Save();
+
         UpdateCoinUI();
     }
 
     private void UpdateCoinUI()
     {
         if (coinText != null)
-            coinText.text = coinCount.ToString(); // Show 1, 2, 3… as coins are collected
+            coinText.text = coinCount.ToString(); // reset on restart
+
+        if (totalCoinText != null)
+            totalCoinText.text = totalCoins.ToString(); // never reset
     }
 
-    // Reset coin count, e.g., on game restart
+    // 👉 Get current run coins (for game over panel)
+    public int GetCurrentCoins()
+    {
+        return coinCount;
+    }
+
+    // 👉 Call this on Game Over Restart Button
     public void ResetCoins()
     {
         coinCount = 0;
         UpdateCoinUI();
     }
 
-    // Optional: hide/show UI (like when in pause menu)
     public void HideCoinUI()
     {
         if (coinText != null)
