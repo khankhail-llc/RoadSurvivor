@@ -11,6 +11,16 @@ public class CarSoundController : MonoBehaviour
 
     private bool isAccelerating = false;
 
+    void Start()
+    {
+        if (engineSound != null)
+        {
+            float savedVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
+            engineSound.volume = savedVolume; // We assume base volume is 1. If it was distinct, we'd need a baseVolume field.
+            engineSound.mute = savedVolume <= 0.01f;
+        }
+    }
+
     void Update()
     {
         // Only modify pitch if engineSound exists

@@ -18,7 +18,7 @@ public class SplashEffects : MonoBehaviour
     public Vector3 smokeOffset = new Vector3(0f, -0.3f, 0f); // Tyre ke neeche se nikle
 
     [Header("Splash Duration")]
-    public float delayAfterFullScale = 1.5f; // Full scale ke baad kitna wait (sec) - smooth end
+    public float delayAfterFullScale = 0f; // Full scale ke baad kitna wait (sec) - smooth end
 
     private ParticleSystem smokePS;
     private bool logoFullyScaled = false;

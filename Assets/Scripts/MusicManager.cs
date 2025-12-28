@@ -13,7 +13,6 @@ public class MusicManager : MonoBehaviour
 
     [Header("Music Settings")]
     public Slider musicSlider;
-    private const string MUSIC_KEY = "MusicState"; // 1 = ON , 0 = OFF
 
     [HideInInspector] public bool isPausedByAd = false;
 
@@ -21,6 +20,8 @@ public class MusicManager : MonoBehaviour
     private bool wasPlayingBeforePause = false;
     private float savedMusicTime = 0f;
     private bool wasPlayingBeforeGameOver = false;
+
+    private const string MUSIC_VOLUME_KEY = "MusicVolume";
 
     private void Awake()
     {
@@ -39,73 +40,74 @@ public class MusicManager : MonoBehaviour
         audioSource.loop = true;
 
         SceneManager.sceneLoaded += OnSceneLoaded;
-
-        LoadMusicState();
     }
 
-    private void Start()
-    {
-        if (musicSlider != null)
-        {
-            musicSlider.onValueChanged.AddListener(OnMusicSliderChanged);
-        }
-    }
+    // ================= SCENE CONTROL =================
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (audioSource == null) return;
+        LoadMusicState();
 
         if (scene.name == gamePlaySceneName)
         {
-            if (!isPausedByAd && audioSource.volume > 0 && !audioSource.mute)
+            if (!isPausedByAd && audioSource.volume > 0)
                 audioSource.Play();
         }
         else
         {
+            // ❌ Main Menu ya koi aur scene → music band
             audioSource.Stop();
         }
     }
 
-    // ================= MUSIC SAVE / LOAD =================
+    // ================= SLIDER REGISTER =================
+
+    public void RegisterSlider(Slider newSlider)
+    {
+        musicSlider = newSlider;
+        if (musicSlider == null) return;
+
+        musicSlider.onValueChanged.RemoveAllListeners();
+        musicSlider.onValueChanged.AddListener(OnMusicSliderChanged);
+
+        float volume = PlayerPrefs.GetFloat(MUSIC_VOLUME_KEY, 1f);
+        musicSlider.value = volume;
+        SetVolume(volume);
+    }
+
+    // ================= SLIDER CHANGE =================
 
     void OnMusicSliderChanged(float value)
     {
         SetVolume(value);
 
-        if (value <= 0.001f)
-        {
-            PlayerPrefs.SetInt(MUSIC_KEY, 0);
-            audioSource.Stop();
-        }
-        else
-        {
-            PlayerPrefs.SetInt(MUSIC_KEY, 1);
-            if (!audioSource.isPlaying && !isPausedByAd)
-                audioSource.Play();
-        }
-
+        PlayerPrefs.SetFloat(MUSIC_VOLUME_KEY, value);
         PlayerPrefs.Save();
+
+        // 🔒 IMPORTANT: sirf GamePlay scene mein play ho
+        if (value > 0.001f &&
+            !audioSource.isPlaying &&
+            !isPausedByAd &&
+            SceneManager.GetActiveScene().name == gamePlaySceneName)
+        {
+            audioSource.Play();
+        }
     }
 
     void LoadMusicState()
     {
-        int state = PlayerPrefs.GetInt(MUSIC_KEY, 1);
+        float volume = PlayerPrefs.GetFloat(MUSIC_VOLUME_KEY, 1f);
+        SetVolume(volume);
 
         if (musicSlider != null)
-            musicSlider.value = state == 1 ? 1f : 0f;
-
-        audioSource.volume = state == 1 ? 1f : 0f;
-        audioSource.mute = state == 0;
-
-        if (state == 0)
-            audioSource.Stop();
+            musicSlider.value = volume;
     }
 
-    // ================= AD PAUSE / RESUME =================
+    // ================= AD CONTROL =================
 
     public void PauseMusic()
     {
-        if (audioSource != null && audioSource.isPlaying)
+        if (audioSource.isPlaying)
         {
             isPausedByAd = true;
             audioSource.Pause();
@@ -114,49 +116,15 @@ public class MusicManager : MonoBehaviour
 
     public void ResumeMusicAfterAd()
     {
-        if (audioSource != null && isPausedByAd && audioSource.volume > 0 && !audioSource.mute)
+        if (isPausedByAd && audioSource.volume > 0 &&
+            SceneManager.GetActiveScene().name == gamePlaySceneName)
         {
             audioSource.UnPause();
             isPausedByAd = false;
         }
     }
 
-    // ================= EXISTING FUNCTIONS =================
-
-    public void PlayMusic()
-    {
-        if (audioSource.volume == 0 || audioSource.mute || isPausedByAd) return;
-        if (!audioSource.isPlaying) audioSource.Play();
-    }
-
-    public void StopMusic()
-    {
-        audioSource.Stop();
-        savedMusicTime = 0f;
-        wasPlayingBeforeGameOver = false;
-    }
-
-    public void PauseMusicForGameOver()
-    {
-        if (audioSource.time > 0)
-        {
-            savedMusicTime = audioSource.time;
-            wasPlayingBeforeGameOver = true;
-        }
-        audioSource.Stop();
-    }
-
-    public void ResumeMusic()
-    {
-        if (audioSource.volume == 0 || audioSource.mute || isPausedByAd) return;
-
-        if (wasPlayingBeforeGameOver)
-        {
-            audioSource.time = savedMusicTime;
-            audioSource.Play();
-            wasPlayingBeforeGameOver = false;
-        }
-    }
+    // ================= USER CONTROL =================
 
     public void PauseMusicByUser()
     {
@@ -170,7 +138,9 @@ public class MusicManager : MonoBehaviour
 
     public void ResumeMusicByUser()
     {
-        if (isPausedByUser && wasPlayingBeforePause && !audioSource.mute)
+        if (isPausedByUser && wasPlayingBeforePause &&
+            audioSource.volume > 0 &&
+            SceneManager.GetActiveScene().name == gamePlaySceneName)
         {
             audioSource.UnPause();
             isPausedByUser = false;
@@ -178,7 +148,33 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    // 🔥 MAIN FIX: HARD MUTE
+    // ================= GAME OVER =================
+
+    public void PauseMusicForGameOver()
+    {
+        if (audioSource.isPlaying)
+        {
+            savedMusicTime = audioSource.time;
+            wasPlayingBeforeGameOver = true;
+            audioSource.Stop();
+        }
+    }
+
+    public void ResumeMusic()
+    {
+        if (wasPlayingBeforeGameOver &&
+            audioSource.volume > 0 &&
+            !isPausedByAd &&
+            SceneManager.GetActiveScene().name == gamePlaySceneName)
+        {
+            audioSource.time = savedMusicTime;
+            audioSource.Play();
+            wasPlayingBeforeGameOver = false;
+        }
+    }
+
+    // ================= VOLUME =================
+
     public void SetVolume(float value)
     {
         audioSource.volume = value;
@@ -191,12 +187,15 @@ public class MusicManager : MonoBehaviour
         else
         {
             audioSource.mute = false;
+            // ❌ yahan Play NA karo
         }
     }
 
     public void RestartMusic()
     {
-        if (audioSource.volume == 0 || audioSource.mute) return;
+        if (audioSource.volume <= 0.001f) return;
+        if (SceneManager.GetActiveScene().name != gamePlaySceneName) return;
+
         audioSource.Stop();
         audioSource.time = 0;
         audioSource.Play();

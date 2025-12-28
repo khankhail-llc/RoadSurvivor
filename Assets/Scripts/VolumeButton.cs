@@ -128,16 +128,20 @@ public class VolumeButton : MonoBehaviour
     private Vector3 originalScale;
 
     private const string MutePrefKey = "GameMuted";
-    private const string VolumePrefKey = "GameVolume";
+    private const string VolumePrefKey = "MusicVolume"; // synced with MusicManager
 
     void Awake()
     {
         // Load saved values
-        isMuted = PlayerPrefs.GetInt(MutePrefKey, 0) == 1;
         float savedVolume = PlayerPrefs.GetFloat(VolumePrefKey, 1f);
+        
+        // If volume is essentially 0, we can consider it muted.
+        // Or we can respect the explicit Mute key. 
+        // Let's rely on volume mostly.
+        isMuted = savedVolume <= 0.01f;
 
         if (allAudioSources == null || allAudioSources.Length == 0)
-            allAudioSources = FindObjectsOfType<AudioSource>();
+            allAudioSources = FindObjectsOfType<AudioSource>(); // Finds all, including MusicManager's if in scene
 
         UpdateAllAudioSources();
 
@@ -152,6 +156,12 @@ public class VolumeButton : MonoBehaviour
         {
             volumeSlider.value = savedVolume;
             volumeSlider.onValueChanged.AddListener(OnSliderValueChanged);
+
+            // Sync with Singleton MusicManager
+            if (MusicManager.Instance != null)
+            {
+                MusicManager.Instance.RegisterSlider(volumeSlider);
+            }
         }
 
         ApplyVolume(savedVolume);
@@ -161,6 +171,11 @@ public class VolumeButton : MonoBehaviour
     {
         isMuted = !isMuted;
 
+        // If muting via button, what should slider do?
+        // Usually buttons are Mute Toggles. 
+        // If unmuted, restore volume?
+        // Current implementation just toggles 'isMuted' and updates sources.
+        
         PlayerPrefs.SetInt(MutePrefKey, isMuted ? 1 : 0);
         PlayerPrefs.Save();
 
@@ -179,8 +194,15 @@ public class VolumeButton : MonoBehaviour
         PlayerPrefs.Save();
 
         // Auto mute logic
+        bool wasMuted = isMuted;
         isMuted = value <= 0.01f;
-        PlayerPrefs.SetInt(MutePrefKey, isMuted ? 1 : 0);
+        
+        // If mute state changed, update everything
+        if (wasMuted != isMuted)
+        {
+             PlayerPrefs.SetInt(MutePrefKey, isMuted ? 1 : 0);
+             UpdateAllAudioSources();
+        }
     }
 
     void ApplyVolume(float volume)

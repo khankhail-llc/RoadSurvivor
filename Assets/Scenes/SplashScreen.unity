@@ -375,7 +375,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416590442}
   serializedVersion: 8
-  lengthInSec: 0.2
+  lengthInSec: 0.05
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -5485,7 +5485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SplashEffects
   logo: {fileID: 785039100}
-  logoScaleSpeed: 0.9
+  logoScaleSpeed: 1
   maxLogoScale: {x: 9, y: 4, z: 1}
   tyre: {fileID: 334549270}
   tyreRotationSpeed: -360

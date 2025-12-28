@@ -34,8 +34,14 @@ public class CarSound : MonoBehaviour
         float targetPitch = Mathf.Lerp(minPitch, maxPitch, t);
         float targetVolume = Mathf.Lerp(minVolume, maxVolume, t);
 
+        float globalVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
+
         engineSource.pitch = Mathf.Lerp(engineSource.pitch, targetPitch, Time.deltaTime * 3f);
-        engineSource.volume = Mathf.Lerp(engineSource.volume, targetVolume, Time.deltaTime * 3f);
+        engineSource.volume = Mathf.Lerp(engineSource.volume, targetVolume * globalVolume, Time.deltaTime * 3f);
+
+        // Explicit mute if global volume is 0
+        if (globalVolume <= 0.01f)
+            engineSource.volume = 0;
     }
 
     public void PlayerOut()
