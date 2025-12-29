@@ -46,6 +46,20 @@ public class CoinManager : MonoBehaviour
         UpdateCoinUI();
     }
 
+    // ⭐ NEW: Add bulk coins (e.g., from Ads or IAP)
+    public void AddCoins(int amount)
+    {
+        totalCoins += amount;
+        
+        PlayerPrefs.SetInt(TOTAL_COIN_KEY, totalCoins);
+        PlayerPrefs.Save();
+
+        UpdateCoinUI();
+        
+        // Optional: Play sound if valid
+        // ClickSound.Instance?.PlayClick(); 
+    }
+
     private void UpdateCoinUI()
     {
         if (coinText != null)
