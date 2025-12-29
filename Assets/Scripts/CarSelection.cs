@@ -29,13 +29,13 @@ public class CarSelection : MonoBehaviour
     private const int ADS_TO_UNLOCK = 4;
 
     private int currentIndex = 0;
-    private const int TOTAL_CARS = 10;
+    private const int TOTAL_CARS = 11;
 
     private void Start()
     {
         if (carPrices == null || carPrices.Length != TOTAL_CARS)
         {
-            carPrices = new int[] { 0, 30, 500, 1000, 1500, 2000, 2500,3000,3500 };
+            carPrices = new int[] { 0, 30, 500, 1000, 1500, 2000, 2500,3000,3500,4000,4500 };
         }
 
         if (buyButton != null)

@@ -6157,14 +6157,6 @@ PrefabInstance:
       propertyPath: carSoundController
       value: 
       objectReference: {fileID: 1809569036}
-    - target: {fileID: 5592534280405637779, guid: 09c16bb350af343d399dda42e9556747, type: 3}
-      propertyPath: carSprites.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5592534280405637779, guid: 09c16bb350af343d399dda42e9556747, type: 3}
-      propertyPath: 'carSprites.Array.data[7]'
-      value: 
-      objectReference: {fileID: 3663749812942462287, guid: f2404864140c90b449b314fd9c930055, type: 3}
     - target: {fileID: 6811154007037122217, guid: 09c16bb350af343d399dda42e9556747, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.13161
@@ -6208,10 +6200,6 @@ PrefabInstance:
     - target: {fileID: 7309103409145870937, guid: 09c16bb350af343d399dda42e9556747, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7469500055946079911, guid: 09c16bb350af343d399dda42e9556747, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
