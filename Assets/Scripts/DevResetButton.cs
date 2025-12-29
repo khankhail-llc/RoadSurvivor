@@ -8,7 +8,7 @@ public class DevResetButton : MonoBehaviour
 {
     [Header("Development Testing")] 
     [Tooltip("Total cars in game")]
-    [SerializeField] private int totalCars = 7;
+    [SerializeField] private int totalCars = 10;
 
     /// <summary>
     /// Sab cars ko lock kar do (except first car)
