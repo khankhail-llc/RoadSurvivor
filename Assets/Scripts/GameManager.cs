@@ -111,6 +111,9 @@ public class GameManager : MonoBehaviour
         player.currentLane = savedLane;
         player.ResetPhysics();
         player.ActivateReviveShield();
+        
+        // ⭐ NEW: Refill fuel so game doesn't end immediately
+        FuelManager.Instance?.ResetFuel();
 
         Time.timeScale = 1f;
 
