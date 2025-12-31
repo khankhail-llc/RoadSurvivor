@@ -29,7 +29,7 @@ public class CarSelection : MonoBehaviour
     private const int ADS_TO_UNLOCK = 4;
 
     private int currentIndex = 0;
-    private int totalCars = 20; // Default fallback
+    private int totalCars = 21; // Default fallback
 
     private void Start()
     {
@@ -43,7 +43,7 @@ public class CarSelection : MonoBehaviour
         if (carPrices == null || carPrices.Length < totalCars)
         {
             // Providing default prices for up to 18 cars as per user requirement
-            int[] defaultPrices = new int[] { 0, 30, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000,8500,9000 };
+            int[] defaultPrices = new int[] { 0, 30, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000,8500,9000,9500};
             
             // If carPrices is null, just use default
             if (carPrices == null)
