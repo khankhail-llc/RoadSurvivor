@@ -6,15 +6,54 @@ public class CoinAdButton : MonoBehaviour
     [Header("Settings")]
     public int rewardAmount = 50;
     
-    private Button button;
+    [Header("UI Panels")]
+    public GameObject coinAdPanel;
+    public Button watchAdButton;
+    public Button closePanelButton;
+
+    private Button mainButton;
 
     void Start()
     {
-        button = GetComponent<Button>();
-        if (button != null)
+        // Setup Main Button (Trigger)
+        mainButton = GetComponent<Button>();
+        if (mainButton != null)
         {
-            button.onClick.AddListener(OnWatchAdClicked);
+            mainButton.onClick.AddListener(() => {
+                if (ClickSound.Instance) ClickSound.Instance.PlayClick();
+                OpenPanel();
+            });
         }
+
+        // Setup Panel Buttons
+        if (watchAdButton != null)
+        {
+            watchAdButton.onClick.AddListener(() => {
+                if (ClickSound.Instance) ClickSound.Instance.PlayClick();
+                OnWatchAdClicked();
+            });
+        }
+
+        if (closePanelButton != null)
+        {
+            closePanelButton.onClick.AddListener(() => {
+                if (ClickSound.Instance) ClickSound.Instance.PlayClick();
+                ClosePanel();
+            });
+        }
+
+        // Ensure panel is closed at start
+        if (coinAdPanel != null) coinAdPanel.SetActive(false);
+    }
+
+    public void OpenPanel()
+    {
+        if (coinAdPanel != null) coinAdPanel.SetActive(true);
+    }
+
+    public void ClosePanel()
+    {
+        if (coinAdPanel != null) coinAdPanel.SetActive(false);
     }
 
     void OnWatchAdClicked()
@@ -37,5 +76,7 @@ public class CoinAdButton : MonoBehaviour
             CoinManager.Instance.AddCoins(rewardAmount);
             Debug.Log($"Granted {rewardAmount} Coins for watching Ad!");
         }
+        
+        ClosePanel();
     }
 }
