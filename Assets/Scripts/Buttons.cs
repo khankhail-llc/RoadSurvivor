@@ -148,11 +148,18 @@ public class Buttons : MonoBehaviour
     public string mainMenuSceneName = "Main Menu";
     public string garageSceneName = "Garage";
 
+    [Header("Exit UI")]
+    public GameObject exitPanel;
+    public Button yesButton;
+    public Button noButton;
+
     private void Start()
     {
         playButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); StartGame(); });
         restartButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); RestartGame(); });
-        exitButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); QuitGame(); });
+        
+        // Changed exitButton listener to OpenExitPanel
+        exitButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); OpenExitPanel(); });
         
         garageButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); OpenGarage(); });
         
@@ -167,11 +174,35 @@ public class Buttons : MonoBehaviour
 
         settingsButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); OpenSettings(); });
         closeSettingsButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); SettingsBack(); });
+        
+        // Exit Panel Listeners
+        yesButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); ConfirmExit(); });
+        noButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); CancelExit(); });
 
         pausedPanel?.SetActive(false);
         settingsPanel?.SetActive(false);
+        exitPanel?.SetActive(false);
 
         ShowPauseButton();
+    }
+
+    public void OpenExitPanel()
+    {
+        exitPanel?.SetActive(true);
+        ToggleButtons(false);
+        Time.timeScale = 0f;
+    }
+
+    public void ConfirmExit()
+    {
+        QuitGame();
+    }
+
+    public void CancelExit()
+    {
+        exitPanel?.SetActive(false);
+        ToggleButtons(true);
+        Time.timeScale = 1f;
     }
 
     public void StartGame()
