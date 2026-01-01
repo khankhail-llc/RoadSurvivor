@@ -246,13 +246,24 @@ public class Buttons : MonoBehaviour
     public void OpenSettings()
     {
         settingsPanel?.SetActive(true);
+        ToggleButtons(false);
         Time.timeScale = 0f;
     }
 
     public void SettingsBack()
     {
         settingsPanel?.SetActive(false);
+        ToggleButtons(true);
         Time.timeScale = 1f;
+    }
+
+    private void ToggleButtons(bool state)
+    {
+        if (playButton) playButton.interactable = state;
+        if (garageButton) garageButton.interactable = state;
+        if (exitButton) exitButton.interactable = state;
+        if (moreGamesButton) moreGamesButton.interactable = state;
+        if (mainMenuButton) mainMenuButton.interactable = state;
     }
 
     public void HidePauseButton() => pauseButton?.gameObject.SetActive(false);
