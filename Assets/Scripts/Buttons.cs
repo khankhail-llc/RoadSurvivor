@@ -128,6 +128,10 @@ public class Buttons : MonoBehaviour
     // 👉 NEW MAIN MENU BUTTON
     public Button mainMenuButton;
 
+    [Header("More Games")]
+    public Button moreGamesButton;
+    public string moreGamesUrl = "https://play.google.com/store/apps/dev?id=YOUR_DEV_ID"; // Replace with actual URL
+
     [Header("Pause UI")]
     public Button pauseButton;
     public GameObject pausedPanel;
@@ -149,8 +153,10 @@ public class Buttons : MonoBehaviour
         playButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); StartGame(); });
         restartButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); RestartGame(); });
         exitButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); QuitGame(); });
-
+        
         garageButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); OpenGarage(); });
+        
+        moreGamesButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); OpenMoreGames(); });
 
         // 👉 MAIN MENU BUTTON LISTENER
         mainMenuButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); GoHome(); });
@@ -184,6 +190,11 @@ public class Buttons : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(garageSceneName);
+    }
+
+    public void OpenMoreGames()
+    {
+        Application.OpenURL(moreGamesUrl);
     }
 
     public void QuitGame()
