@@ -27,6 +27,15 @@ public class CoinAdButton : MonoBehaviour
 
         if (watchAdButton != null)
         {
+            // 🛠️ AUTO-FIX: Disable Raycast Target on Text inside this button
+            var texts = watchAdButton.GetComponentsInChildren<Text>(true);
+            foreach (var t in texts) t.raycastTarget = false;
+            
+            var tmps = watchAdButton.GetComponentsInChildren<TMPro.TextMeshProUGUI>(true);
+            foreach (var tmp in tmps) tmp.raycastTarget = false;
+            
+            Debug.Log("[CoinAdButton] Auto-fixed Watch Ad Button raycast targets!");
+
             watchAdButton.onClick.AddListener(() => {
                 Debug.Log("[CoinAdButton] Watch Ad Button Clicked via Listener");
                 if (ClickSound.Instance) ClickSound.Instance.PlayClick();
@@ -40,6 +49,13 @@ public class CoinAdButton : MonoBehaviour
 
         if (closePanelButton != null)
         {
+            // 🛠️ AUTO-FIX: Disable Raycast Target on Text inside local button
+            var texts = closePanelButton.GetComponentsInChildren<Text>(true);
+            foreach (var t in texts) t.raycastTarget = false;
+
+            var tmps = closePanelButton.GetComponentsInChildren<TMPro.TextMeshProUGUI>(true);
+            foreach (var tmp in tmps) tmp.raycastTarget = false;
+
             closePanelButton.onClick.AddListener(() => {
                 if (ClickSound.Instance) ClickSound.Instance.PlayClick();
                 ClosePanel();

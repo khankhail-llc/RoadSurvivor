@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class UIDebugger : MonoBehaviour
@@ -9,10 +10,9 @@ public class UIDebugger : MonoBehaviour
         // Detect left mouse click
         if (Input.GetMouseButtonDown(0))
         {
-            // Check if EventSystem exists
             if (EventSystem.current == null)
             {
-                Debug.LogError("[UIDebugger] No EventSystem found in scene!");
+                Debug.LogError("[UIDebugger] No EventSystem found!");
                 return;
             }
 
@@ -26,15 +26,32 @@ public class UIDebugger : MonoBehaviour
 
             if (results.Count > 0)
             {
-                Debug.Log($"<b>[UIDebugger] Click detected! Hit {results.Count} UI objects:</b>");
+                Debug.Log($"<b>[UIDebugger] Hit {results.Count} UI objects:</b>");
                 foreach (RaycastResult result in results)
                 {
-                    Debug.Log($"   ➥ <b>{result.gameObject.name}</b> (Depth: {result.depth}, Layer: {result.gameObject.layer})");
+                    GameObject go = result.gameObject;
+                    string info = $"   ➥ <b>{go.name}</b> (Depth: {result.depth}, Layer: {go.layer})";
+                    
+                    // Check for Button
+                    Button btn = go.GetComponent<Button>();
+                    if (btn == null) btn = go.GetComponentInParent<Button>(); // Check parent too
+                    
+                    if (btn != null)
+                    {
+                        info += $" <color=green>[BUTTON FOUND]</color> Interactable: {btn.interactable}";
+                        if (!btn.interactable) info += " <color=red>(DISABLED)</color>";
+                    }
+                    else
+                    {
+                        info += " [No Button]";
+                    }
+                    
+                    Debug.Log(info);
                 }
             }
             else
             {
-                Debug.Log("[UIDebugger] Clicked, but hit NO UI elements.");
+                Debug.Log("[UIDebugger] Clicked but hit nothing.");
             }
         }
     }
