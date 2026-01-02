@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement; // Added for SceneManager
+using UnityEngine.UI; // Added for UI Slider
 
 public class SplashEffects : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class SplashEffects : MonoBehaviour
     [Header("Tyre Rotation")]
     public Transform tyre; // Inspector mein "Tyre Image (RectTransform)" assign karo
     public float tyreRotationSpeed = -360f; // -360 for clockwise (peeche ghumne ke liye)
+    public Slider loadingBar; // Assign UI Slider for loading progress
 
     [Header("Smoke Settings")]
     public float smokeEmitRate = 40f; // Kitna dense smoke
@@ -34,6 +36,11 @@ public class SplashEffects : MonoBehaviour
 
         // Smoke khud banao - koi particle manually add mat karna
         CreateAndSetupSmoke();
+        if (loadingBar != null) {
+            loadingBar.minValue = 0;
+            loadingBar.maxValue = 1;
+            loadingBar.value = 0;
+        }
     }
 
     void CreateAndSetupSmoke()
@@ -172,7 +179,13 @@ public class SplashEffects : MonoBehaviour
                 // Thoda wait kar ke smooth end
                 Invoke(nameof(LoadNextScene), delayAfterFullScale);
             }
+            // Update loading bar based on logo scaling progress
+        if (loadingBar != null && logo != null)
+        {
+            float progress = Mathf.Clamp01(logo.localScale.x / maxLogoScale.x);
+            loadingBar.value = progress;
         }
+    }
     }
 
     void LoadNextScene()
