@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d7ad3de646bff584099da9ff3ce70ac1
+guid: e5ee68f2be7784d96a394bceae29232c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5211705871417040898
-    second: Untitled design (4)_0
+      213: -2882672684162946180
+    second: pauseIcon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,43 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Untitled design (4)_0
+      name: pauseIcon_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 1024
+        x: 1085
+        y: 2293
+        width: 1289
+        height: 1313
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 20061a390e2b35840800000000000000
-      internalID: 5211705871417040898
+      spriteID: c7beeb08770bef7d0800000000000000
+      internalID: -2882672684162946180
       vertices: []
       indices: 
       edges: []
@@ -161,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Untitled design (4)_0: 5211705871417040898
+      pauseIcon_0: -2882672684162946180
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
