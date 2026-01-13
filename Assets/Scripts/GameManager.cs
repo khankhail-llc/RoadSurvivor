@@ -71,6 +71,9 @@ public class GameManager : MonoBehaviour
         MusicManager.Instance?.PauseMusicForGameOver();
         FindFirstObjectByType<CarSound>()?.PauseSoundByUser();
 
+        // 🔒 FIX: Disable buttons behind the panel
+        FindFirstObjectByType<Buttons>()?.ToggleButtons(false);
+
         Debug.Log("PLAYER OUT → REVIVE OFFER");
     }
 
@@ -119,6 +122,9 @@ public class GameManager : MonoBehaviour
 
         MusicManager.Instance?.ResumeMusic();
         FindFirstObjectByType<CarSound>()?.ResumeSound();
+
+        // 🔓 FIX: Re-enable buttons
+        FindFirstObjectByType<Buttons>()?.ToggleButtons(true);
 
         Debug.Log("PLAYER REVIVED ✅");
     }

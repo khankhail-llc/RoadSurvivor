@@ -180,7 +180,7 @@ public class Buttons : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    private void ToggleButtons(bool state)
+    public void ToggleButtons(bool state)
 {
     if (playButton) playButton.interactable = state;
     if (garageButton) garageButton.interactable = state;
