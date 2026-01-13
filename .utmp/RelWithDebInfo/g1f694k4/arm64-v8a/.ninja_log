@@ -1,0 +1,12 @@
+# ninja log v5
+12	475	1768313967561508559	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	ad0b21d8e3c8d2f5
+476	646	1768313967717982000	/Users/jawad/Desktop/DarkStar Studios/RoadSurvivor/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/g1f694k4/obj/arm64-v8a/libswappywrapper.so	726d40742827614d
+4	2350	1768313969428553517	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	484c947fc660428e
+2	2362	1768313969442921168	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	ac0c86f46be10c61
+1	2436	1768313969515370472	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	95289be3d3cfa69e
+7	2438	1768313969519046206	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	cb3520f51cd330da
+1	2581	1768313969660177956	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	c624610d5454b85c
+9	2681	1768313969754134981	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	60f69cb1365374c1
+3	2957	1768313970035042323	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	625ad8202d78742c
+0	3118	1768313970201136009	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	1b60ba88ec193c5e
+3118	3231	1768313970316628668	/Users/jawad/Desktop/DarkStar Studios/RoadSurvivor/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/g1f694k4/obj/arm64-v8a/libgame.so	34297196de0394e5
