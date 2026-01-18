@@ -1920,7 +1920,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 21.9, y: 13}
+  m_AnchoredPosition: {x: 2.9, y: 13}
   m_SizeDelta: {x: 34.17664, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &401440469
@@ -1943,7 +1943,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 30
+  m_text: 100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2009,7 +2009,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 3.6315272, w: -0.29166985}
+  m_margin: {x: 0, y: 0, z: -4.7898474, w: -0.29166985}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6162,7 +6162,7 @@ MonoBehaviour:
   - {fileID: 1327637114}
   - {fileID: 874563599}
   - {fileID: 1674784133}
-  carPrices: 00000000f401000064000000dc050000d0070000c4090000b80b0000ac0d0000a00f000094110000881300007c1500007017000064190000581b00004c1d0000401f000034210000282300001c250000
+  carPrices: 0000000064000000f4010000dc050000d0070000c4090000b80b0000ac0d0000a00f000094110000881300007c1500007017000064190000581b00004c1d0000401f000034210000282300001c250000
   adProgressText: {fileID: 597919278}
 --- !u!4 &1065911258
 Transform:

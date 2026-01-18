@@ -88,15 +88,18 @@ public class RewardedAdController : MonoBehaviour
 
     private void AdLoadCallback(RewardedAd ad, LoadAdError error)
     {
-        isLoading = false;
-
+        // We handle isLoading reset in various cases
+        
         if (error != null || ad == null)
         {
+            isLoading = false; // Reset so retry can work
             Debug.LogError("[RewardedAd] Load failed: " + error?.GetMessage() + ". Retrying in 10s...");
+            CancelInvoke(nameof(LoadRewardedAd)); // Clear any pending
             Invoke(nameof(LoadRewardedAd), 10f); // Retry after 10 seconds
             return;
         }
 
+        isLoading = false;
         rewardedAd = ad;
         RegisterAdEvents();
         Debug.Log("[RewardedAd] Loaded Successfully.");
@@ -237,19 +240,32 @@ public class RewardedAdController : MonoBehaviour
         if (watchAdButton == null)
         {
             Debug.Log("[RewardedAdController] Searching for Revive/Watch Button in scene...");
-            var buttons = GameObject.FindObjectsOfType<Button>(true);
-            foreach (var b in buttons)
+            
+            // Optimization: First check if there is a button named specifically
+            GameObject go = GameObject.Find("ReviveByAd");
+            if (go == null) go = GameObject.Find("WatchAdButton");
+            
+            if (go != null)
             {
-                var tmp = b.GetComponentInChildren<TextMeshProUGUI>(true);
-                if (tmp != null)
+                watchAdButton = go.GetComponent<Button>();
+            }
+
+            // Fallback to text search if still null
+            if (watchAdButton == null)
+            {
+                var buttons = GameObject.FindObjectsOfType<Button>(true);
+                foreach (var b in buttons)
                 {
-                    string t = tmp.text.ToLower();
-                    // Covers "Revive" or "Watch Ad"
-                    if (t.Contains("revive") || (t.Contains("watch") && t.Contains("ad")))
+                    var tmp = b.GetComponentInChildren<TextMeshProUGUI>(true);
+                    if (tmp != null)
                     {
-                        watchAdButton = b;
-                        Debug.Log($"[RewardedAdController] Found button: '{b.name}' with text '{t}'");
-                        break; 
+                        string t = tmp.text.ToLower();
+                        if (t.Contains("revive") || (t.Contains("watch") && t.Contains("ad")))
+                        {
+                            watchAdButton = b;
+                            Debug.Log($"[RewardedAdController] Found button: '{b.name}' with text '{t}'");
+                            break; 
+                        }
                     }
                 }
             }

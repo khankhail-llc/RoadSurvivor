@@ -36,6 +36,7 @@ public class CoinAdButton : MonoBehaviour
             
             Debug.Log("[CoinAdButton] Auto-fixed Watch Ad Button raycast targets!");
 
+            watchAdButton.onClick.RemoveAllListeners();
             watchAdButton.onClick.AddListener(() => {
                 Debug.Log("[CoinAdButton] Watch Ad Button Clicked via Listener");
                 if (ClickSound.Instance) ClickSound.Instance.PlayClick();
@@ -44,7 +45,7 @@ public class CoinAdButton : MonoBehaviour
         }
         else
         {
-            Debug.LogError("[CoinAdButton] 'Watch Ad Button' is NOT assigned in the Inspector!");
+            Debug.LogWarning("[CoinAdButton] 'Watch Ad Button' is NOT assigned in the Inspector!");
         }
 
         if (closePanelButton != null)
@@ -56,6 +57,7 @@ public class CoinAdButton : MonoBehaviour
             var tmps = closePanelButton.GetComponentsInChildren<TMPro.TextMeshProUGUI>(true);
             foreach (var tmp in tmps) tmp.raycastTarget = false;
 
+            closePanelButton.onClick.RemoveAllListeners();
             closePanelButton.onClick.AddListener(() => {
                 if (ClickSound.Instance) ClickSound.Instance.PlayClick();
                 ClosePanel();
@@ -73,7 +75,7 @@ public class CoinAdButton : MonoBehaviour
         }
         else
         {
-            Debug.LogError("[CoinAdButton] 'Coin Ad Panel' is NOT assigned in the Inspector!");
+            Debug.LogWarning("[CoinAdButton] 'Coin Ad Panel' is NOT assigned in the Inspector!");
         }
     }
 

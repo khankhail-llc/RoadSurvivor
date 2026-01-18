@@ -148,23 +148,31 @@ public class VolumeButton : MonoBehaviour
         if (volumeButton == null)
             volumeButton = GetComponent<Button>();
 
-        originalScale = volumeButton.transform.localScale;
-        volumeButton.onClick.AddListener(OnButtonClick);
-
-        // Slider setup
-        if (volumeSlider != null)
+        if (volumeButton != null)
         {
-            volumeSlider.value = savedVolume;
-            volumeSlider.onValueChanged.AddListener(OnSliderValueChanged);
-
-            // Sync with Singleton MusicManager
-            if (MusicManager.Instance != null)
+            originalScale = volumeButton.transform.localScale;
+            volumeButton.onClick.AddListener(OnButtonClick);
+            
+            // Slider setup
+            if (volumeSlider != null)
             {
-                MusicManager.Instance.RegisterSlider(volumeSlider);
-            }
-        }
+                volumeSlider.value = savedVolume;
+                volumeSlider.onValueChanged.AddListener(OnSliderValueChanged);
 
-        ApplyVolume(savedVolume);
+                // Sync with Singleton MusicManager
+                if (MusicManager.Instance != null)
+                {
+                    MusicManager.Instance.RegisterSlider(volumeSlider);
+                }
+            }
+
+            ApplyVolume(savedVolume);
+        }
+        else
+        {
+            Debug.LogWarning("[VolumeButton] volumeButton component is missing on " + gameObject.name + ". Script will be disabled.");
+            this.enabled = false;
+        }
     }
 
     void OnButtonClick()

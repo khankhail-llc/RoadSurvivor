@@ -64,16 +64,16 @@ public class Buttons : MonoBehaviour
         yesButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); ConfirmExit(); });
         noButton?.onClick.AddListener(() => { ClickSound.Instance?.PlayClick(); CancelExit(); });
 
-        pausedPanel?.SetActive(false);
-        settingsPanel?.SetActive(false);
-        exitPanel?.SetActive(false);
+        if (pausedPanel != null) pausedPanel.SetActive(false);
+        if (settingsPanel != null) settingsPanel.SetActive(false);
+        if (exitPanel != null) exitPanel.SetActive(false);
 
         ShowPauseButton();
     }
 
     public void OpenExitPanel()
     {
-        exitPanel?.SetActive(true);
+        if (exitPanel != null) exitPanel.SetActive(true);
         ToggleButtons(false);
         Time.timeScale = 0f;
     }
@@ -85,7 +85,7 @@ public class Buttons : MonoBehaviour
 
     public void CancelExit()
     {
-        exitPanel?.SetActive(false);
+        if (exitPanel != null) exitPanel.SetActive(false);
         ToggleButtons(true);
         Time.timeScale = 1f;
     }
@@ -125,9 +125,9 @@ public class Buttons : MonoBehaviour
     public void PauseGame()
 {
     Time.timeScale = 0f;
-    pausedPanel?.SetActive(true);
+    if (pausedPanel != null) pausedPanel.SetActive(true);
     // Ensure settings panel is hidden when paused
-    settingsPanel?.SetActive(false);
+    if (settingsPanel != null) settingsPanel.SetActive(false);
     // Disable other UI buttons while paused
     ToggleButtons(false);
     MusicManager.Instance?.PauseMusicByUser();
@@ -137,7 +137,7 @@ public class Buttons : MonoBehaviour
     public void ResumeGame()
 {
     Time.timeScale = 1f;
-    pausedPanel?.SetActive(false);
+    if (pausedPanel != null) pausedPanel.SetActive(false);
     // Re-enable UI buttons after pause
     ToggleButtons(true);
 
@@ -167,15 +167,15 @@ public class Buttons : MonoBehaviour
     public void OpenSettings()
 {
     // Ensure pause panel is hidden when opening settings
-    pausedPanel?.SetActive(false);
-    settingsPanel?.SetActive(true);
+    if (pausedPanel != null) pausedPanel.SetActive(false);
+    if (settingsPanel != null) settingsPanel.SetActive(true);
     ToggleButtons(false);
     Time.timeScale = 0f;
 }    
 
     public void SettingsBack()
     {
-        settingsPanel?.SetActive(false);
+        if (settingsPanel != null) settingsPanel.SetActive(false);
         ToggleButtons(true);
         Time.timeScale = 1f;
     }
